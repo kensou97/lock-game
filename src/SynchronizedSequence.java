@@ -8,20 +8,20 @@
  * @version 1.0.0
  * @since 16-1-21 下午5:08
  */
-public class SequenceByKensou99 extends Sequence {
+public class SynchronizedSequence extends Sequence {
 
-    public SequenceByKensou99(int step) {
+    public SynchronizedSequence(int step) {
         super(step);
     }
 
     @Override
     public synchronized int getNext() {
-        if (offset < step) {
-            return base + offset++;
+        if (offset.intValue() < step) {
+            return base + offset.getAndIncrement();
         }
 
         base = getSequenceFromDB();
-        offset = 0;
-        return base + offset++;
+        offset.set(0);
+        return base + offset.getAndIncrement();
     }
 }

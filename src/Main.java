@@ -27,6 +27,8 @@ public class Main {
         int STEP = 100;
 
         //初始化
+        final Sequence s = new ReentrantLockSequence(STEP);
+
         final int occur[][] = new int[CONCURRENCY][M];
         for (int i = 0; i < CONCURRENCY; i++) {
             occur[i] = new int[M];
@@ -38,7 +40,6 @@ public class Main {
         final CountDownLatch countDownLatch = new CountDownLatch(CONCURRENCY);
         final long finishTime[] = new long[CONCURRENCY];
 
-        final Sequence s = new SequenceByKensou99(STEP);
 
         final long startTime = System.currentTimeMillis();
         for (int i = 0; i < CONCURRENCY; i++) {

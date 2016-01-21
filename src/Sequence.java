@@ -1,3 +1,7 @@
+import java.util.Arrays;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * title: <br/>
  * description: 描述<br/>
@@ -14,7 +18,7 @@ public class Sequence {
 
     public int base = 0;
 
-    public int offset = 0;
+    public AtomicInteger offset = new AtomicInteger(0);
 
     public int step;
 
@@ -23,13 +27,13 @@ public class Sequence {
     }
 
     public int getNext() {
-        if (offset < step) {
-            return base + offset++;
+        if (offset.intValue() < step) {
+            return base + offset.getAndIncrement();
         }
 
         base = getSequenceFromDB();
-        offset = 0;
-        return base + offset++;
+        offset.set(0);
+        return base + offset.getAndIncrement();
     }
 
     /**

@@ -18,16 +18,16 @@ public class Main {
      */
     public static void main(String[] args) throws InterruptedException {
         //sequence最大值
-        final int M = 100000;
+        final int M = 1000000;
 
         //并发线程数
         int CONCURRENCY = 4;
 
         //sequence步数
-        int STEP = 100;
+        int STEP = 10000;
 
         //初始化
-        final Sequence s = new ReentrantLockSequence(STEP);
+        final Sequence s = new SynchronizedSequence(STEP);
 
         final int occur[][] = new int[CONCURRENCY][M];
         for (int i = 0; i < CONCURRENCY; i++) {

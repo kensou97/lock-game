@@ -37,6 +37,7 @@ public class ReentrantLockSequence extends Sequence {
 
             offset.set(1);
             base = getSequenceFromDB();
+            offset.set(1);
             return base;
         } finally {
             reentrantLock.unlock();

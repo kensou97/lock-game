@@ -18,12 +18,13 @@ public class Sequence {
 
     public int base = 0;
 
-    public AtomicInteger offset = new AtomicInteger(0);
+    public AtomicInteger offset = new AtomicInteger(Integer.MAX_VALUE);
 
     public int step;
 
     public Sequence(int step) {
         this.step = step;
+        simulation -= step;
     }
 
     public int getNext() {
@@ -42,6 +43,11 @@ public class Sequence {
      * @return
      */
     public synchronized int getSequenceFromDB() {
+        try{
+            Thread.sleep(3L);
+        }catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return simulation += step;
     }
 
